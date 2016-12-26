@@ -1,0 +1,20 @@
+[root]
+name = "waitforfile"
+version = "0.1.0"
+dependencies = [
+ "inotify 0.3.0 (registry+https://github.com/rust-lang/crates.io-index)",
+]
+
+[[package]]
+name = "inotify"
+version = "0.3.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+dependencies = [
+ "libc 0.2.18 (registry+https://github.com/rust-lang/crates.io-index)",
+]
+
+[[package]]
+name = "libc"
+version = "0.2.18"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+

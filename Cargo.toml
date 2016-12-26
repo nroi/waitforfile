@@ -1,0 +1,7 @@
+[package]
+name = "waitforfile"
+version = "0.1.0"
+authors = ["Fabian Muscariello <nroi@mailbox.org>"]
+
+[dependencies]
+inotify = "0.3.0"
