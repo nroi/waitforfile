@@ -5,11 +5,13 @@ env:
   global:
     # This will be part of the release tarball
     - PROJECT_NAME=waitforfile
-    # - MAKE_DEB=yes
-    # TODO update these two variables. They are part of the .deb package metadata
-    # - DEB_MAINTAINER="Jorge Aparicio <japaricious@gmail.com>"
-    # - DEB_DESCRIPTION="Hello, world! written in Rust"
+    # TODO comment out this variable if you don't want to build .deb packages on all the targets.
+    - MAKE_DEB=yes
+    - DEB_MAINTAINER="Fabian Muscariello <nroi@mailbox.org>"
+    - DEB_DESCRIPTION="Wait until the given file exists"
 
+# AFAICT There are a few ways to set up the build jobs. This one is not the DRYest but I feel is the
+# easiest to reason about.
 # TODO Feel free to remove the channels/targets you don't need
 # NOTE Make *sure* you don't remove a reference (&foo) if you are going to dereference it (*foo)
 matrix:
