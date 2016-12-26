@@ -45,9 +45,6 @@ matrix:
             # Transparent emulation
             - qemu-user-static
             - binfmt-support
-    - os: osx
-      rust: stable
-      env: TARGET=i686-apple-darwin
     - os: linux
       rust: stable
       env: TARGET=i686-unknown-linux-gnu
@@ -67,9 +64,6 @@ matrix:
           - musl
           - musl-dev
           - musl-tools
-    - os: osx
-      rust: stable
-      env: TARGET=x86_64-apple-darwin
     - os: linux
       rust: stable
       env: TARGET=x86_64-unknown-linux-gnu
@@ -98,9 +92,6 @@ matrix:
         apt:
           # Use the same packages the stable version uses
           packages: *armv7_unknown_linux_gnueabihf
-    - os: osx
-      rust: beta
-      env: TARGET=i686-apple-darwin
     - os: linux
       rust: beta
       env: TARGET=i686-unknown-linux-gnu
@@ -115,9 +106,6 @@ matrix:
       addons:
         apt:
           packages: *musl_packages
-    - os: osx
-      rust: beta
-      env: TARGET=x86_64-apple-darwin
     - os: linux
       rust: beta
       env: TARGET=x86_64-unknown-linux-gnu
@@ -146,9 +134,6 @@ matrix:
         apt:
           # Use the same packages the stable version uses
           packages: *armv7_unknown_linux_gnueabihf
-    - os: osx
-      rust: nightly
-      env: TARGET=i686-apple-darwin
     - os: linux
       rust: nightly
       env: TARGET=i686-unknown-linux-gnu
@@ -163,9 +148,6 @@ matrix:
       addons:
         apt:
           packages: *musl_packages
-    - os: osx
-      rust: nightly
-      env: TARGET=x86_64-apple-darwin
     - os: linux
       rust: nightly
       env: TARGET=x86_64-unknown-linux-gnu
