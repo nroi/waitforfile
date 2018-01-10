@@ -1,7 +1,6 @@
 extern crate inotify;
 
-use inotify::INotify;
-use inotify::ffi::*;
+use inotify::{Inotify, WatchMask};
 use std::path::Path;
 use std::path::PathBuf;
 use std::env;
@@ -39,14 +38,23 @@ fn get_dirname() -> Result<(PathBuf, PathBuf), (String, i32)> {
 }
 
 fn wait_for(dirname: &Path, full_dir_name: &Path) -> () {
-    let mut ino = INotify::init().unwrap();
-    ino.add_watch(&dirname, IN_CREATE).unwrap();
+    let mut ino = Inotify::init().unwrap();
+    ino.add_watch(&dirname, WatchMask::CREATE).unwrap();
     if !full_dir_name.exists() {
         loop {
-            let events = ino.wait_for_events().unwrap();
-            for event in events.iter() {
-                if dirname.join(&(event).name) == full_dir_name {
-                    return;
+            let mut buffer = [0; 1024];
+            let events = ino.read_events_blocking(&mut buffer)
+                .expect("Error while reading events");
+            for event in events {
+                match event.name {
+                    Some(name) => {
+                        if dirname.join(name) == full_dir_name {
+                            return;
+                        }
+                    },
+                    // TODO if the watched directory is deleted, we should quit
+                    // with a non-zero exit code.
+                    None => ()
                 }
             }
         }
