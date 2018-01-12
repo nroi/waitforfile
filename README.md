@@ -10,5 +10,4 @@ waitforfile <filename>
 
 ## Installation
 
-Debian packages can be found under [releases](https://github.com/nroi/waitforfile/releases).
-A package for Arch Linux is available on the [AUR](https://aur.archlinux.org/packages.php?K=waitforfile).
+A package for Arch Linux is available on the [AUR](https://aur.archlinux.org/packages/waitforfile/).
