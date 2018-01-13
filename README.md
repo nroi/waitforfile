@@ -7,6 +7,9 @@ waitforfile <filename>
 ```
 
 where `filename` is a relative or absolute path. If `filename` is an absolute path (e.g. `/foo/bar/baz`), the directory portion (e.g. `/foo/bar`) must already exist prior to running the command.
+`waitforfile` will return with exit code 0 if the file already exists or has been created during
+execution. If the directory is deleted while `waitforfile` is running, it will return with exit code
+1.
 
 ## Installation
 
