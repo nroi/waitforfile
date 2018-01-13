@@ -1,6 +1,6 @@
 extern crate inotify;
 
-use inotify::{Inotify, WatchMask};
+use inotify::{Inotify, WatchMask, EventMask};
 use std::path::Path;
 use std::path::PathBuf;
 use std::env;
@@ -37,9 +37,9 @@ fn get_dirname() -> Result<(PathBuf, PathBuf), (String, i32)> {
     }
 }
 
-fn wait_for(dirname: &Path, full_dir_name: &Path) -> () {
+fn wait_for(dirname: &Path, full_dir_name: &Path) -> i32 {
     let mut ino = Inotify::init().unwrap();
-    ino.add_watch(&dirname, WatchMask::CREATE).unwrap();
+    ino.add_watch(&dirname, WatchMask::DELETE_SELF | WatchMask::CREATE).unwrap();
     if !full_dir_name.exists() {
         loop {
             let mut buffer = [0; 1024];
@@ -49,16 +49,21 @@ fn wait_for(dirname: &Path, full_dir_name: &Path) -> () {
                 match event.name {
                     Some(name) => {
                         if dirname.join(name) == full_dir_name {
-                            return;
+                            return 0;
                         }
                     },
-                    // TODO if the watched directory is deleted, we should quit
-                    // with a non-zero exit code.
-                    None => ()
+                    None => {
+                        if event.mask == EventMask::DELETE_SELF {
+                            eprintln!("The watched directory has been deleted.");
+                            return 1;
+                        }
+                    }
                 }
             }
         }
     }
+    // file already exists prior to running this program.
+    return 0;
 }
 
 fn main() {
@@ -70,5 +75,5 @@ fn main() {
             std::process::exit(code);
         }
     };
-    wait_for(&dirname, &full_dir_name);
+    std::process::exit(wait_for(&dirname, &full_dir_name));
 }
