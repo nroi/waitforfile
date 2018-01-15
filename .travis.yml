@@ -129,6 +129,7 @@ branches:
     # release tags
     - /^v\d+\.\d+\.\d+.*$/
     - master
+    - hardfloat
 
 notifications:
   email:
