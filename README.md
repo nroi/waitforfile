@@ -13,7 +13,15 @@ execution. If the directory is deleted while `waitforfile` is running, it will r
 
 ## Installation
 
-Binaries are available under [releases](https://github.com/nroi/waitforfile/releases). If you happen to use Arch Linux, you'll find a package on the [AUR](https://aur.archlinux.org/packages/waitforfile/). If you want to compile from source instead, you need to have cargo installed. Clone the repository and run:
+Arch Linux:
+A package is available on the [AUR](https://aur.archlinux.org/packages/waitforfile/).
+
+Void Linux:
+```
+xbps-install -S waitforfile
+```
+
+For all other distributions, you may either download a [binary release](https://github.com/nroi/waitforfile/releases), or build from source. To install from source, you need to have cargo installed. Then, clone this repository and run:
 ```
 cargo build --release
 ```
